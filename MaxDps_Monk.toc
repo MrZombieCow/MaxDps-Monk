@@ -8,6 +8,7 @@
 ## X-WoWI-ID: 24647
 
 Main.lua
+Config.lua
 Specialization\Brewmaster.lua
 Specialization\Mistweaver.lua
 Specialization\Windwalker.lua
