@@ -1,4 +1,4 @@
-﻿local addonName, addonTable = ...;
+local addonName, addonTable = ...;
 _G[addonName] = addonTable;
 
 --- @type MaxDps
@@ -20,6 +20,9 @@ Monk.spellMeta = {
 }
 
 function Monk:Enable()
+	Monk:InitializeDatabase();
+	Monk:CreateConfig();
+	
 	if MaxDps.Spec == 1 then
 		MaxDps.NextSpell = Monk.Brewmaster;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Brewmaster');
