@@ -14,6 +14,7 @@ local defaultOptions = {
 	StormEarthAndFireAsCooldown = true,
 	TouchOfKarmaAsCooldown = true,
 	AnyAsCooldown = false,
+	FSKAsCooldown = false,
 };
 
 function Monk:GetConfig()
@@ -66,6 +67,13 @@ function Monk:GetConfig()
 				TouchOfKarmaAsCooldown = {
 					type   = 'checkbox',
 					label  = 'Touch of Karma as cooldown',
+					column = 12
+				},
+			},
+			[8] = {
+				FSKAsCooldown = {
+					type   = 'checkbox',
+					label  = 'Use Flying Serpent Kick in rotation',
 					column = 12
 				},
 			},
