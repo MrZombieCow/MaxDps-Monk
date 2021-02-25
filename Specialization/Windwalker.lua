@@ -45,7 +45,10 @@ local WW = {
 	FallenOrder				= 326860,
 	BonedustBrew			= 325216,
 	FaelineStomp			= 327104,
-	CracklingJadeLightning  = 117952
+	CracklingJadeLightning  = 117952,
+	
+	--Conduits
+	CalculatedStrikes		= 19
 };
 
 local hitCombo = {
@@ -269,7 +272,9 @@ function Monk:WindwalkerSingleTarget()
 		return WW.RisingSunKick;
 	end
 	
-	if cooldown[WW.FistsOfFury].ready and chi >= 3 and (energyTimeToMax > FoFCastTime or chiMax - chi <= 1) then
+	if cooldown[WW.FistsOfFury].ready and chi >= 3 
+	and (energyTimeToMax > FoFCastTime or chiMax - chi <= 1) --Comment out this line if you want easier rotation, but waste energy 
+	then
 		return WW.FistsOfFury;
 	end
 	
@@ -296,6 +301,10 @@ function Monk:WindwalkerSingleTarget()
 	if buff[WW.DanceOfChiJiBuff].up and spellCombo[1] ~= WW.SpinningCraneKick and currentSpell ~= WW.SpinningCraneKick then
 		return WW.SpinningCraneKick;
 	end
+	
+	if chi >= 2 and MotC >= 2 and spellCombo[1] ~= WW.SpinningCraneKick and currentSpell ~= WW.SpinningCraneKick and targets >= 2 and conduit[WW.CalculatedStrikes] then
+		return WW.SpinningCraneKick;
+	end
 		
 	if ((buff[WW.BokProc].up or chi > 5) or 
 	(cooldown[WW.FistsOfFury].remains > 1 and cooldown[WW.RisingSunKick].remains > 1 and chi >= 1) or 
@@ -308,7 +317,7 @@ function Monk:WindwalkerSingleTarget()
 		return WW.TigerPalm;
 	end
 	
-	if cooldown[WW.FlyingSerpentKick].ready and talents[WW.ChiBurst] then
+	if cooldown[WW.FlyingSerpentKick].ready and Monk.db.FSKAsCooldown then
 		return WW.FlyingSerpentKick;
 	end
 	
@@ -347,7 +356,9 @@ function Monk:WindwalkerAoe()
 		return WW.SpinningCraneKick;
 	end
 
-	if cooldown[WW.FistsOfFury].ready and chi >= 3 and (energyTimeToMax > FoFCastTime or chiMax - chi <= 1) then
+	if cooldown[WW.FistsOfFury].ready and chi >= 3 
+	and (energyTimeToMax > FoFCastTime or chiMax - chi <= 1) --Comment out this line if you want easier rotation, but waste energy
+	then
 		return WW.FistsOfFury;
 	end
 	
@@ -385,7 +396,7 @@ function Monk:WindwalkerAoe()
 		return WW.ChiWave;
 	end
 	
-	if cooldown[WW.FlyingSerpentKick].ready and not buff[WW.BokProc].up and talents[WW.ChiBurst] then
+	if cooldown[WW.FlyingSerpentKick].ready and not buff[WW.BokProc].up and Monk.db.FSKAsCooldown then
 		return WW.FlyingSerpentKick;
 	end
 
@@ -454,11 +465,11 @@ function Monk:WindwalkerWeaponsOfOrder()
 		return WW.TigerPalm;
 	end
 	
-	if chi >= 3 and buff[WW.WeaponsOfOrderChiBuff].up then
+	if chi >= 3 or buff[WW.WeaponsOfOrderChiBuff].up then
 		return WW.BlackoutKick;
 	end
 	
-	if cooldown[WW.FlyingSerpentKick].ready and talents[WW.ChiBurst] then
+	if cooldown[WW.FlyingSerpentKick].ready and Monk.db.FSKAsCooldown then
 		return WW.FlyingSerpentKick;
 	end
 end
