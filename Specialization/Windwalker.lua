@@ -302,7 +302,8 @@ function Monk:WindwalkerSingleTarget()
 		return WW.SpinningCraneKick;
 	end
 	
-	if chi >= 2 and MotC >= 2 and spellCombo[1] ~= WW.SpinningCraneKick and currentSpell ~= WW.SpinningCraneKick and targets >= 2 and conduit[WW.CalculatedStrikes] then
+	if chi >= 2 and MotC >= 2 and spellCombo[1] ~= WW.SpinningCraneKick and currentSpell ~= WW.SpinningCraneKick and targets >= 2 and conduit[WW.CalculatedStrikes] 
+	and (((chi > 3 or cooldown[WW.FistsOfFury].remains > 6) and (chi >= 5 or cooldown[WW.FistsOfFury].remains > 2)) or energyTimeToMax <= 3) then
 		return WW.SpinningCraneKick;
 	end
 		
